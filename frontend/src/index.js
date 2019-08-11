@@ -1,135 +1,3 @@
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
 import React, { Component } from 'react'
 import { render } from 'react-dom'
  
@@ -145,7 +13,7 @@ const Request = ({ onSubmit }) => (
     <FRC.Form onSubmit={onSubmit}>
         <fieldset>
             <legend>Request</legend>
-            <Input name="f" id="f" value="xs**2" label="Function" type="text" help="Use `xs` for variable name" required />
+            <Input name="f" id="f" value="sqrt(4-xs**2)" label="Function" type="text" help="Use `xs` for variable name" required />
             <Input name="a" id="a" value="0" label="a" type="number" required />
             <Input name="b" id="b" value="2" label="b" type="number" required />
             <Input name="c" id="c" value="0" label="c" type="number" required />
@@ -160,7 +28,7 @@ const Request = ({ onSubmit }) => (
     </FRC.Form>
 )
  
-const Pending = ({ id }) => <h2>Pending #{id}</h2>
+const Pending = ({ id }) => <h4>Pending #{id}</h4>
 class Result extends Component {
     constructor(props) {
         super(props)
@@ -184,8 +52,8 @@ class Result extends Component {
  
         return (
             <div style={{ marginBottom: '2rem' }}>
-                <h2>Result #{id}</h2>
-                <h3>Approximate Value: { approx }</h3>
+                <h4>Result #{id}</h4>
+                <h5>Approximate Value: { approx }</h5>
                 { div ? <div dangerouslySetInnerHTML={{__html: div}} /> : null }
             </div>
         )
