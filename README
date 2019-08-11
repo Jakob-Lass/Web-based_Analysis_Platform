@@ -1,3 +1,27 @@
 This is a code base written according to the tutorial by James Powell (https://www.youtube.com/watch?v=eEXKIp8h0T0).
 
 It is meant to create a web-base application in python approximating the integral under a curve.
+
+Things that need to be running:
+ - Flask app (python restapi.py)
+ - redis (redis-server), should run at port 6379
+ - Celery server (celery -A worker worker --loglevel=debug), with the argument that worker.py is the worker
+
+To check that the Flask-App works (with httpie installed) run:
+$ http PUT http://localhost:5000 f='sqrt(4-xs**2)' a:=0 b:=2 c:=0 d:=2 size:=10000
+
+
+which returns with the id of the task that was started. Getting the list of current tasks is:
+$ http GET http://localhost:5000
+
+To get a specific result, use e.g. id=0
+$ http GET http://localhost:5000/id
+
+To install frontend dependencies run from the frontend directory
+$ npm install
+
+In order to automatically reload and build js-files make gulp watch the js-files as a server:
+$node_modules/.bin/gulp watch
+
+Lastly, run the front end http server:
+$python httpserver.py static
