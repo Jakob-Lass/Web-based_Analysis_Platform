@@ -3,10 +3,16 @@
 from flask import Flask, request, jsonify
 from algorithm import approx
 
+TASKS = {} # Store all tasks started with celery
 
+@app.route('/', methods=['GET'])
+def list_tasks():
+    tasks = {task_id: {'ready': task.ready()}
+            for task_id, task in TASKS.items()}
+    return jsonify(tasks)
 
 app = Flask(__name__)
-@app.route('/')
+@app.route('/', methods=['PUT'])
 def put_task():
     f = request.json['f']
     a = request.json['a']
