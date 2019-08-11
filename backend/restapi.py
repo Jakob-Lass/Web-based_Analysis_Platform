@@ -3,8 +3,13 @@
 from flask import Flask, request, jsonify
 from worker import integrate
 
+
+
 TASKS = {} # Store all tasks started with celery
 app = Flask(__name__)
+
+from flask_cors import CORS
+CORS(app)
 
 @app.route('/', methods=['GET'])
 def list_tasks():
