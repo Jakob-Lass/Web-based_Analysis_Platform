@@ -12,6 +12,16 @@ def list_tasks():
             for task_id, task in TASKS.items()}
     return jsonify(tasks)
 
+@app.route('/<int:task_id>', methods=['GET'])
+def get_task(task_id):
+    response = {'task_id': task_id}
+    try:
+        task = TASKS[task_id]
+        if task.ready():
+            response['result'] = task.get()
+    except Exception:
+        response['err'] = 'Id not found in TASKS'
+    return jsonify(response)
 
 @app.route('/', methods=['PUT'])
 def put_task():
