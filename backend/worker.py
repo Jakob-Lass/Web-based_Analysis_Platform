@@ -13,6 +13,6 @@ app = Celery(__name__, backend='rpc://', broker='redis://')
 @app.task
 def integrate(*args, **kwargs):
     try:
-        approx(*args,**kwargs)
+        return approx(*args,**kwargs)
     except Exception:
         return None
