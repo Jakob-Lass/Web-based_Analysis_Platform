@@ -1,9 +1,10 @@
 #!usr/bin/env python3 
 
 from flask import Flask, request, jsonify
-from algorithm import approx
+from worker import integrate
 
 TASKS = {} # Store all tasks started with celery
+app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def list_tasks():
@@ -11,7 +12,7 @@ def list_tasks():
             for task_id, task in TASKS.items()}
     return jsonify(tasks)
 
-app = Flask(__name__)
+
 @app.route('/', methods=['PUT'])
 def put_task():
     f = request.json['f']
@@ -23,7 +24,7 @@ def put_task():
 
 
     response = {
-        'result': approx(f,a,b,c,d,size)
+        'result': integrate.delay(f,a,b,c,d,size)
     }
 
     return jsonify(response)
